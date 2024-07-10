@@ -30,4 +30,24 @@ export const PlayerSchema = new Schema({
     type: Number,
     enum: [1, 2, 3],
   },
+  strength: {
+    type: Number,
+    enum: [1, 2, 3],
+  },
+  endurance: {
+    type: Number,
+    enum: [1, 2, 3],
+  },
+  technique: {
+    type: Number,
+    enum: [1, 2, 3],
+  },
+  tactical: {
+    type: Number,
+    enum: [1, 2, 3],
+  },
+  techncreated_date: {
+    type: Date,
+    default: Date.now
+  },
 });

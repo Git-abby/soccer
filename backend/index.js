@@ -19,7 +19,7 @@ app.use(bodyParser.json())
 //cors
 app.use(cors())
 
-// routes(app)
+routes(app)
 
 app.get('/', (req, res) =>{
     res.send(`Our Application is running at port ${PORT}`)
