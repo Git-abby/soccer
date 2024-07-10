@@ -46,3 +46,12 @@ export const updatePlayerWithId = async (req, res) => {
     res.send(err);
   }
 };
+
+export const deletePlayerWithId = async (req, res) => {
+  try {
+    await Player.deleteOne({ _id: req.params.PlayerId });
+    res.json({ message: "Player Successfully Deleted!" });
+  } catch (err) {
+    res.send(err);
+  }
+};
