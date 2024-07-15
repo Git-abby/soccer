@@ -8,7 +8,8 @@ export const addNewPlayer = async (req, res) => {
 
   try {
     const player = await newPlayer.save();
-    res.json(player);
+    console.log(player)
+    res.json("ADDED", player);
   } catch (err) {
     res.send(err);
   }
