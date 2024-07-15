@@ -16,67 +16,69 @@ const Navbars = () => {
     cursor: "pointer",
     // background: "white",
   };
-  return(
+  return (
     <header className="bg-gray-900 p-2">
-    <nav className="flex justify-between items-center w-[92%] mx-auto">
-      <div className="relative">
-        <Link to="/">
-        <Lottie
-          animationData={aniamationData}
-          style={style}
-          loop={true}
-          autoPlay={true}
-          />
+      <nav className="flex justify-between items-center w-[92%] mx-auto">
+        <div className="relative">
+          <Link to="/">
+            <Lottie
+              animationData={aniamationData}
+              style={style}
+              loop={true}
+              autoPlay={true}
+            />
           </Link>
-      </div>
-      <div
-        className={`nav-links duration-500 md:static absolute bg-gray-900 text-white md:min-h-fit min-h-[60vh] left-0 md:w-auto w-full flex items-center px-5 ${
-          isOpen ? "top-0" : "top-[-100%]"
-        }`}>
-        <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
-          <li>
-            <Link to="/view" className="hover:text-gray-300">
-              View
-            </Link>
-          </li>
-          <li>
-          
-          <Link to="/add" className="hover:text-gray-300">
-              Add
-            </Link>
-          </li>
-          <li>
-          <Link to="/manage" className="hover:text-gray-300">
-              Manage
-            </Link>
-          </li>
-          <li>
-          <Link to="/about" className="hover:text-gray-300">
-              About
-            </Link>
-          </li>
-          <li>
-          <Link to="/contact" className="hover:text-gray-300">
-              Contact
-            </Link>
-          </li>
-        </ul>
-      </div>
-      <div className="flex items-center gap-6">
-        {/* <button className="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-500">
+        </div>
+        <div
+          className={`nav-links duration-500 md:static absolute bg-gray-900 text-white md:min-h-fit min-h-[60vh] left-0 md:w-auto w-full flex items-center px-5 ${
+            isOpen ? "top-0" : "top-[-100%]"
+          }`}>
+          <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
+            <li>
+              <Link to="/view" className="hover:text-gray-300">
+                View
+              </Link>
+            </li>
+            <li>
+              <Link to="/add" className="hover:text-gray-300">
+                Add
+              </Link>
+            </li>
+            <li>
+              <Link to="/manage" className="hover:text-gray-300">
+                Manage
+              </Link>
+            </li>
+            <li>
+              <Link to="/about" className="hover:text-gray-300">
+                About
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="hover:text-gray-300">
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div className="flex items-center gap-6">
+          {/* <button className="bg-blue-600 text-white px-5 py-2 rounded-full hover:bg-blue-500">
         Sign in
       </button> */}
-        <a href="/" className="bn3637 bn38">
-          Sign In
-        </a>
-        <div className="hamburger-menu md:hidden text-white">
-          <Hamburger toggled={isOpen} toggle={setOpen} />
+          <li>
+            <Link to="/register" className="bn3637 bn38">
+              Sign In
+            </Link>
+          </li>
+
+          <div className="hamburger-menu md:hidden text-white">
+            <Hamburger toggled={isOpen} toggle={setOpen} />
+          </div>
         </div>
-      </div>
-    </nav>
-  </header>
+      </nav>
+    </header>
   );
-}
+};
 
 export default Navbars;
 
@@ -112,7 +114,7 @@ export default Navbars;
 //               </Link>
 //             </li>
 //             <li>
-            
+
 //               <a className="hover:text-gray-300" href="#">
 //                 Add Player
 //               </a>

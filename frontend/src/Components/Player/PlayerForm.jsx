@@ -21,6 +21,7 @@ class PlayerForm extends React.Component {
       })
       .then((Response) => {
         console.log(Response);
+        this.props.addPlayer(Response.data);
         this.setState({ submitted: true });
       })
       .catch((error) => console.log(error));

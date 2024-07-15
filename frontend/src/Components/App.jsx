@@ -13,6 +13,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ManagePlaye from "./Player/ManagePlaye";
 // import { BrowserRouter as Route, Router, Routes } from "react-router-dom";
 // import Header from "./Header/header";
+import { Register } from "./Authentication/Register";
+import { UserLogin } from "./Authentication/UserLogin";
 
 class App extends React.Component {
   constructor(props) {
@@ -20,13 +22,18 @@ class App extends React.Component {
     this.state = {
       players: [],
       currentPlayer: {},
-  
     };
 
+    this.addPlayer = this.addPlayer.bind(this);
     this.updateCurrentPlayer = this.updateCurrentPlayer.bind(this);
+    this.deletePlayer = this.deletePlayer.bind(this);
   }
 
   componentDidMount() {
+    this.fetchPlayer();
+  }
+
+  fetchPlayer(){
     const url = "http://localhost:4000/players";
 
     axios
@@ -39,6 +46,8 @@ class App extends React.Component {
       })
       .catch((error) => console.log(error));
   }
+  
+
 
   updateCurrentPlayer(item) {
     this.setState({
@@ -52,10 +61,16 @@ class App extends React.Component {
       .delete(url)
       .then((Response) => {
         console.log(Response);
+        this.fetchPlayer();
       })
       .catch((err) => console.log(err));
   }
+addPlayer(player){
+  this.setState((prevState) => ({
+    players: [...prevState.players, player]
+  }));
 
+}
   render() {
     return (
       <>
@@ -77,7 +92,7 @@ class App extends React.Component {
             path="/add"
             element={
               <>
-                <PlayerForm />
+                <PlayerForm addPlayer={this.addPlayer}/>
               </>
             }
           />
@@ -90,44 +105,10 @@ class App extends React.Component {
               />
             }
           />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<UserLogin />} />
           <Route path="/" element={<Hero />} />
         </Routes>
-
-        {/* <Router>
-          <NavBars /> */}
-        {/* <Routes> */}
-        {/* <Switch>
-
-            <Route path="/" element={<Hero />} />
-            </Switch> */}
-        {/* <Route
-              path="/view"
-              element={
-                <PlayerList
-                  players={this.state.players}
-                  updateCurrentPlayer={this.updateCurrentPlayer}
-                  deletePlayer={this.deletePlayer}
-                  />
-              }
-            />
-            <Route path="/add" element={<PlayerForm />} />
-            <Route
-              path="/manage"
-              element={<PlayerSingle player={this.state.currentPlayer} />}
-              />
-          </Routes> */}
-        {/* </Router> */}
-        {/* <div className="row">
-          <div className="col">
-        
-          </div>
-          <div className="col">
-          <PlayerSingle player={this.state.currentPlayer}/>
-          </div>0
-          <div className="col">
-            <PlayerForm />
-          </div>
-        </div> */}
       </>
     );
   }
