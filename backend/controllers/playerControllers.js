@@ -11,6 +11,7 @@ export const addNewPlayer = async (req, res) => {
     console.log(player)
     res.json("ADDED", player);
   } catch (err) {
+    console.log(err);
     res.send(err);
   }
 };

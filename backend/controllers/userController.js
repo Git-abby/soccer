@@ -48,7 +48,7 @@ export const registerUser = async (req, res) => {
 
   try {
     const user = await newUser.save();
-    res.send({ user, message: "Registration Success" });
+    res.send({ user: user, message: "Registration Success" });
     res.json(user);
   } catch (err) {
     res.send(err);
