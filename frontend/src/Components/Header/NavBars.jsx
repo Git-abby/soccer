@@ -66,7 +66,7 @@ const Navbars = () => {
         Sign in
       </button> */}
           <li>
-            <Link to="/register" className="bn3637 bn38">
+            <Link to="/login" className="bn3637 bn38">
               Sign In
             </Link>
           </li>

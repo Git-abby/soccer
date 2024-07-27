@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export const Register = () => {
   // const history = useHistory()
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
@@ -23,6 +24,10 @@ export const Register = () => {
   const register = (e) => {
     e.preventDefault();
     const { email, password, reEnterPassword } = user;
+    if(email == "" || password == ""){
+      setMessage("Please Enter Input!")
+      return;
+    }
     if (email && password && password === reEnterPassword) {
       axios.post("http://localhost:4000/register", user).then((res) => {
         console.log(res);
@@ -41,6 +46,7 @@ export const Register = () => {
           <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Create an account
           </h1>
+          <p>{message}</p>
           <form className="space-y-4 md:space-y-6" action="#">
             <div>
               <label
@@ -55,7 +61,7 @@ export const Register = () => {
                 value={user.email}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="name@company.com"
-                required=""
+                required
                 onChange={handleChange}
               />
             </div>
@@ -72,7 +78,7 @@ export const Register = () => {
                 value={user.password}
                 placeholder="••••••••"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                required=""
+                required
                 onChange={handleChange}
               />
             </div>
@@ -89,25 +95,23 @@ export const Register = () => {
                 value={user.reEnterPassword}
                 placeholder="••••••••"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                required=""
+                required="true"
                 onChange={handleChange}
               />
             </div>
 
             <button
-              type="submit"
               onClick={register}
-              className="w-full mt-5 cursor-pointer bg-blue-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+              type="submit"
+              className="w-full bg-blue-500 text-white hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
               Register
             </button>
-            <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-              Already have an account?{" "}
-              <Link
-                to={"/login"}
-                className="font-medium text-primary-600 hover:underline dark:text-primary-500 bg-black">
-                Login
-              </Link>
-            </p>
+
+            <Link
+              to="/login"
+              className="block w-full bg-slate-400 text-white hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+              Login
+            </Link>
           </form>
         </div>
       </div>

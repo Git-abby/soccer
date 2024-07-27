@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export const UserLogin = () => {
 
 
@@ -23,12 +23,15 @@ export const UserLogin = () => {
   const login = (e) => {
     e.preventDefault();
     const { email, password } = user;
+    if(email=="" || password==""){
+      setMessage("Please enter email and password!");
+    }
     if (email && password) {
       axios.post("http://localhost:4000/login", user)
         .then((res) => {
           console.log(res);
           setMessage(res.data.message); // Set success message
-          // navigate("/");
+          navigate("/");
         })
         .catch((error) => {
           console.error("Login Error:", error);
@@ -40,16 +43,17 @@ export const UserLogin = () => {
   return (
     <>
     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-    {message && (
-            <p className={`text-sm font-medium ${success ? "text-green-500" : "text-red-500"}`}>
-              {message}
-            </p>
-          )}
+   
       <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Create an account
           </h1>
+          {message && (
+            <p className={`text-sm font-medium ${success ? "text-green-500" : "text-red-500"}`}>
+              {message}
+            </p>
+          )}
           <form className="space-y-4 md:space-y-6" action="#">
             <div>
               <label
@@ -92,6 +96,8 @@ export const UserLogin = () => {
               className="w-full bg-blue-500 text-white hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
               Login
             </button>
+            <Link to="/register"  className="block w-full bg-slate-400 text-white hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+            Register</Link>
           </form>
         </div>
       </div>
