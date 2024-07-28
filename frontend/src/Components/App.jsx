@@ -15,6 +15,7 @@ import ManagePlaye from "./Player/ManagePlaye";
 // import Header from "./Header/header";
 import { Register } from "./Authentication/Register";
 import { UserLogin } from "./Authentication/UserLogin";
+import { CookiesProvider } from "react-cookie";
 
 class App extends React.Component {
   constructor(props) {
@@ -73,45 +74,47 @@ class App extends React.Component {
   render() {
     return (
       <>
-        {/* <NavBars /> */}
-        <Navbars />
+        <CookiesProvider>
+          {/* <NavBars /> */}
+          <Navbars />
 
-        <Routes>
-          <Route
-            path="/manage"
-            element={
-              <ManagePlaye
-                players={this.state.players}
-                updateCurrentPlayer={this.updateCurrentPlayer}
-                deletePlayer={this.deletePlayer}
-              />
-            }
-          />
-          <Route
-            path="/add"
-            element={
-              <>
-                <PlayerForm
-                  addPlayer={this.addPlayer}
-                  fetchPlayer={this.fetchPlayer}
+          <Routes>
+            <Route
+              path="/manage"
+              element={
+                <ManagePlaye
+                  players={this.state.players}
+                  updateCurrentPlayer={this.updateCurrentPlayer}
+                  deletePlayer={this.deletePlayer}
                 />
-              </>
-            }
-          />
-          <Route
-            path="/view"
-            element={
-              <PlayerList
-                players={this.state.players}
-                updateCurrentPlayer={this.updateCurrentPlayer}
-              />
-            }
-          />
-          <Route path="/player/:PlayerId" element={<PlayerSingle/>} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<UserLogin />} />
-          <Route path="/" element={<Hero />} />
-        </Routes>
+              }
+            />
+            <Route
+              path="/add"
+              element={
+                <>
+                  <PlayerForm
+                    addPlayer={this.addPlayer}
+                    fetchPlayer={this.fetchPlayer}
+                  />
+                </>
+              }
+            />
+            <Route
+              path="/view"
+              element={
+                <PlayerList
+                  players={this.state.players}
+                  updateCurrentPlayer={this.updateCurrentPlayer}
+                />
+              }
+            />
+            <Route path="/player/:PlayerId" element={<PlayerSingle />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<UserLogin />} />
+            <Route path="/" element={<Hero />} />
+          </Routes>
+        </CookiesProvider>
       </>
     );
   }

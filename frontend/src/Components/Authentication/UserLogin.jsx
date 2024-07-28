@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+// import useCoockies from 'react-cookie';
+
 export const UserLogin = () => {
 
-
+const [cookies, setCookie] = useCookies(['user'])
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
@@ -30,6 +33,7 @@ export const UserLogin = () => {
       axios.post("http://localhost:4000/login", user)
         .then((res) => {
           console.log(res);
+          setCookie('user', res.data, {path: '/'})
           setMessage(res.data.message); // Set success message
           navigate("/");
         })
