@@ -27,13 +27,14 @@ class App extends React.Component {
     this.addPlayer = this.addPlayer.bind(this);
     this.updateCurrentPlayer = this.updateCurrentPlayer.bind(this);
     this.deletePlayer = this.deletePlayer.bind(this);
+    this.fetchPlayer = this.fetchPlayer.bind(this);
   }
 
   componentDidMount() {
     this.fetchPlayer();
   }
 
-  fetchPlayer(){
+  fetchPlayer() {
     const url = "http://localhost:4000/players";
 
     axios
@@ -46,8 +47,6 @@ class App extends React.Component {
       })
       .catch((error) => console.log(error));
   }
-  
-
 
   updateCurrentPlayer(item) {
     this.setState({
@@ -65,12 +64,12 @@ class App extends React.Component {
       })
       .catch((err) => console.log(err));
   }
-addPlayer(player){
-  this.setState((prevState) => ({
-    players: [...prevState.players, player]
-  }));
+  addPlayer(player) {
+    this.setState((prevState) => ({
+      players: [...prevState.players, player],
+    }));
+  }
 
-}
   render() {
     return (
       <>
@@ -92,7 +91,10 @@ addPlayer(player){
             path="/add"
             element={
               <>
-                <PlayerForm addPlayer={this.addPlayer}/>
+                <PlayerForm
+                  addPlayer={this.addPlayer}
+                  fetchPlayer={this.fetchPlayer}
+                />
               </>
             }
           />
@@ -105,6 +107,7 @@ addPlayer(player){
               />
             }
           />
+          <Route path="/player/:PlayerId" element={<PlayerSingle/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<UserLogin />} />
           <Route path="/" element={<Hero />} />
