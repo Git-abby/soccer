@@ -44,31 +44,48 @@ const Navbars = () => {
             isOpen ? "top-0" : "top-[-100%]"
           }`}>
           <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
-            <li>
-              <Link to="/view" className="hover:text-gray-300">
-                View
-              </Link>
-            </li>
-            <li>
-              <Link to="/add" className="hover:text-gray-300">
-                Add
-              </Link>
-            </li>
-            <li>
-              <Link to="/manage" className="hover:text-gray-300">
-                Manage
-              </Link>
-            </li>
-            <li>
-              <Link to="/about" className="hover:text-gray-300">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact" className="hover:text-gray-300">
-                Contact
-              </Link>
-            </li>
+            {cookies.user && cookies.user.user ? (
+              <>
+                <li>
+                  <Link to="/view" className="hover:text-gray-300">
+                    View
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/add" className="hover:text-gray-300">
+                    Add
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/manage" className="hover:text-gray-300">
+                    Manage
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about" className="hover:text-gray-300">
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="hover:text-gray-300">
+                    Contact
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link to="/about" className="hover:text-gray-300">
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="hover:text-gray-300">
+                    Contact
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
         <div className="flex items-center gap-6">
@@ -84,21 +101,18 @@ const Navbars = () => {
           </li> : <Link to="/login" className="bn3637 bn38">
               Sign In
             </Link>} */}
-          {cookies.user.user ? (
+          {cookies.user && cookies.user.user ? (
             <li className="flex justify-between  items-center px-3">
-              <span className="text-white font-bold pr-3">~{cookies.user.user.name}</span>
-              <Link
-                onClick={handleLogout}
-                to="/"
-                className="bn3637 bn38">
+              <span className="text-white font-bold pr-3">
+                ~{cookies.user.user.name}
+              </span>
+              <Link onClick={handleLogout} to="/" className="bn3637 bn38">
                 Logout
               </Link>
             </li>
           ) : (
             <li>
-              <Link
-                to="/login"
-                className="bn3637 bn38">
+              <Link to="/login" className="bn3637 bn38">
                 Sign In
               </Link>
             </li>
